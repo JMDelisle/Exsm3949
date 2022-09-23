@@ -1,0 +1,7 @@
+2, 4, 6, 8
+1, 2, 3, 4
+Example Chart 2
+X-axis example label
+Y-axis example label
+3
+2
