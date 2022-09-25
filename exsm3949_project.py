@@ -6,7 +6,7 @@
 # plt.plot(graph_1, color = 'red')
 # plt.plot(graph_2, color = 'black')
 # plt.show()
-import questionary
+import csv
 from random import choices
 import numpy as np
 import matplotlib.pyplot as plt
@@ -85,7 +85,7 @@ while loop == 1:
                 if any(answer.lower() == f for f in ["yes", 'y', '1', 'ye']):
                     print("Please enter a Y-axis label: ")
                     ylabels = input()
-                    plt.xlabel(ylabels)
+                    plt.ylabel(ylabels)
                     break
                 elif any(answer.lower() == f for f in ['no', 'n', '0']):
                     print("No")
@@ -105,9 +105,9 @@ while loop == 1:
             while i < 2:
                 answer = input("Would you like to choose a custom line style? (yes or no)")
                 if any(answer.lower() == f for f in ["yes", 'y', '1', 'ye']):
-                    print("Please choose a line style: ")
-                    print = choices['-', ':', '--']
-                    plt.plot(choices)
+                    print("Please enter a line style as you see with quotations:(' '-',':','--', '-.' ') ")
+                    lineStyle = input()
+                    plt.plot(linestyle = lineStyle)
                     break
                 elif any(answer.lower() == f for f in ['no', 'n', '0']):
                     print("No")
@@ -125,9 +125,9 @@ while loop == 1:
             while i < 2:
                 answer = input("Would you like to choose a custom marker style? (yes or no)")
                 if any(answer.lower() == f for f in ["yes", 'y', '1', 'ye']):
-                    print("Please choose a marker style: ")
-                    choices = (".", "o", "x")
-                    plt.plot(choices)
+                    print("Please enter a marker style as you see with quotations: (' '.', 'o', 'x' ') ")
+                    markerStyle = input()
+                    plt.plot(marker = markerStyle)
                     plt.show()
                     break
                 elif any(answer.lower() == f for f in ['no', 'n', '0']):
@@ -143,12 +143,37 @@ while loop == 1:
         question5()
 
     elif choice == 2:
-        # add1 = input("number1:") #this is just random, need to take file from Example.txt
-        my_file = open("Exampledata.txt", "r")
-        for line in my_file:
-            print(line)
-            # my_file.close()        
+        X = []
+        Y = []
+        
+        with open('Exampledata.txt', 'r') as datafile:
+            plotting = csv.reader(datafile, delimiter=',')
             
+            for ROWS in plotting:
+                X.append(int(ROWS[0]))
+                Y.append(int(ROWS[1]))
+        
+        plt.plot(X, Y, marker = '*')
+        plt.title('ExampleData Charts')
+        plt.xlabel('X-axis label')
+        plt.ylabel('Y-axis label')
+        plt.show()
+        
+        
+        # x = []
+        # y = []
+        # for line in open('Exampledata.txt', 'r'):
+        #     lines = [i for i in line.split()]
+        #     x.append(lines[0])
+        #     y.append(int(lines[1]))
+            
+        # plt.title("ExampleData Charts")
+        # plt.xlabel('X-axis label')
+        # plt.ylabel('Y-axis label')
+        # plt.yticks(y)
+        # plt.plot(x, y, marker = 'o', c = 'g')
+        
+        # plt.show()            
             
     elif choice == 3:
         loop = 0
