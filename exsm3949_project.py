@@ -6,6 +6,7 @@
 # plt.plot(graph_1, color = 'red')
 # plt.plot(graph_2, color = 'black')
 # plt.show()
+import questionary
 from random import choices
 import numpy as np
 import matplotlib.pyplot as plt
@@ -105,7 +106,7 @@ while loop == 1:
                 answer = input("Would you like to choose a custom line style? (yes or no)")
                 if any(answer.lower() == f for f in ["yes", 'y', '1', 'ye']):
                     print("Please choose a line style: ")
-                    choices = ['-', ':', '--'].ask()
+                    print = choices['-', ':', '--']
                     plt.plot(choices)
                     break
                 elif any(answer.lower() == f for f in ['no', 'n', '0']):
