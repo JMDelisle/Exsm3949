@@ -106,7 +106,6 @@ while loop == 1:
                     print("Please enter a line style # you want to see:(' 1)Solid Line, 2)Dotted Line, 3)Dashed Line, 4)Dashed/Dotted Line') ")
                     lineStyles=input()
                     plt.plot(linestyle = lineStyles)
-                    plt.show()
                     break
 
                 elif any(answer.lower() == f for f in ['no', 'n', '0']):
@@ -127,9 +126,9 @@ while loop == 1:
                 answer = input("Would you like to choose a custom marker style? (yes or no)")
                 if any(answer.lower() == f for f in ["yes", 'y', '1', 'ye']):
                     print("Please enter a marker style # you want to see: (' 1)Circle, 2)Star, 3)X, 4)Point') ")
-                    markerStyle = input()
+                    markerStyles = input()
                     
-                    plt.plot(marker = markerStyle)
+                    plt.plot(marker = markerStyles)
                     plt.show()
 
                     break
