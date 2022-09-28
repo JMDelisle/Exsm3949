@@ -1,15 +1,7 @@
-# import matplotlib.pyplot as plt #plt is like a key so you don't have to use import everytime!
-
-# import matplotlib.pyplot as plt
-# graph_1 = [10, 12, 31, 13, 21, 1]
-# graph_2 = [-10, -12, -31, -13, -21, -1]
-# plt.plot(graph_1, color = 'red')
-# plt.plot(graph_2, color = 'black')
-# plt.show()
 import csv
-from random import choices
 import numpy as np
 import matplotlib.pyplot as plt
+
 
 loop = 1
 
@@ -18,13 +10,16 @@ while loop == 1:
     print("Your options are:")
     print()
     print("1) Manual Data Entry")
-    print("2) Entere data from Text File")
+    print("2) Enter data from Text File")
     print("3) Exit")
 
-    choice = input("Choose your option:")
+    choice = input("Choose your option:").strip()
+    print("<----->")
     choice = int(choice)
 
     if choice == 1:
+        print("Manual Data Entry")
+        print("<----->")
         print("Please enter X-Axis values:")
         x=list(map(int,input().split(",")))
         x.sort()
@@ -105,9 +100,10 @@ while loop == 1:
             while i < 2:
                 answer = input("Would you like to choose a custom line style? (yes or no)")
                 if any(answer.lower() == f for f in ["yes", 'y', '1', 'ye']):
-                    print("Please enter a line style as you see with quotations:(' '-',':','--', '-.' ') ")
+                    print("Please enter a line style # you want to see:(' 1)Solid Line, 2)Dotted Line, 3)Dashed Line, 4)Dashed/Dotted Line') ")
                     lineStyle = input()
                     plt.plot(linestyle = lineStyle)
+                
                     break
                 elif any(answer.lower() == f for f in ['no', 'n', '0']):
                     print("No")
@@ -118,6 +114,10 @@ while loop == 1:
                         print('Please enter yes or no')
                     else:
                         print("Nothing done")
+                if len(userData):
+                    [lineStyle] = userData 
+
+
         question4()
 
         def question5():
@@ -125,10 +125,11 @@ while loop == 1:
             while i < 2:
                 answer = input("Would you like to choose a custom marker style? (yes or no)")
                 if any(answer.lower() == f for f in ["yes", 'y', '1', 'ye']):
-                    print("Please enter a marker style as you see with quotations: (' '.', 'o', 'x' ') ")
-                    markerStyle = input()
-                    plt.plot(marker = markerStyle)
+                    print("Please enter a marker style # you want to see: (' 1)Circle, 2)Star, 3)X, 4)Point') ")
+                    markerStyles = input()
+                    plt.plot(marker = markerStyles)
                     plt.show()
+
                     break
                 elif any(answer.lower() == f for f in ['no', 'n', '0']):
                     print("No")
@@ -140,40 +141,113 @@ while loop == 1:
                         print('Please enter yes or no')
                     else:
                         print("Nothing done")
+                        
+
         question5()
 
+    
+    
+    
     elif choice == 2:
-        X = []
-        Y = []
-        
-        with open('Exampledata.txt', 'r') as datafile:
-            plotting = csv.reader(datafile, delimiter=',')
+        userData = list()
+                       
+        def question6():
+            # global userData
+
+            i = 0
+            while i < 2:
+                answer = input("Would you like to open .txt file? (yes or no)")
+                if any(answer.lower() == f for f in ["yes", 'y', '1', 'ye']):
+                    dataName = input("Please enter the file name: ")
+                    f = open(f'{dataName}', 'r')
+                    print(dataName)
+                    for line in f.readlines():
+                        fileData = line.strip().split(",")
+                        userData.append(fileData)
+
+                elif any(answer.lower() == f for f in ['no', 'n', '0']):
+                    print("No")
+                    plt.show()
+                    break   
+                else:
+                    i += 1
+                    if i < 2:
+                        print('Please enter yes or no')
+                    else:
+                        print("Nothing done")
+                if len(userData):
+                    [xAxis, yAxis, topTitle, xAxisLabel, yAxisLabel, lineStyle, markerStyle] = userData 
+                    
+                    xAxis = [float(x) for x in xAxis]
+                    yAxis = [float(y) for y in yAxis]
+                    [plotTitles] = topTitle
+                    [xaxisLabels] = xAxisLabel
+                    [yaxisLabels] = yAxisLabel
+                    [customLineStyle] = lineStyle
+                    [customMarkerStyle] = markerStyle
+                    
+                    
+                    #User Line Style Choices
+                    if customLineStyle == "1":
+                        lineStyle = 'solid'
+                    elif customLineStyle == "2":
+                        lineStyle = 'dotted'
+                    elif customLineStyle == "3":
+                        lineStyle = '--'
+                    elif customLineStyle == "4":
+                        lineStyle = 'dashdot'
+                    else: customLineStyle = 'None'
+                    
+                    #User Maker Style Choices 
+                    if customMarkerStyle == "1":
+                        markerStyle = 'o'
+                    elif customMarkerStyle == "2":
+                        markerStyle = '*'
+                    elif customMarkerStyle == "3":
+                        markerStyle = 'x'
+                    elif customMarkerStyle == "4":
+                        markerStyle = '.'
+                    else: markerStyle = 'None'
+                    
+                    plt.plot(xAxis, yAxis, linestyle = lineStyle, marker = customMarkerStyle)
+                    plt.title(plotTitles)
+                    plt.xlabel(xaxisLabels)
+                    plt.ylabel(yaxisLabels)
+                    plt.show()
+                    f.close()
+
+                    
+        question6()
+
+        # f = open('Exampledata.txt', 'r')
+        # for line in f.readlines():
+        #     print(line)
+        #     print(line.strip().split(","))
+        #     dataName = input('Please enter your file name: ')
+        #     fileData = line.strip().split(",")
             
-            for ROWS in plotting:
-                X.append(int(ROWS[0]))
-                Y.append(int(ROWS[1]))
-        
-        plt.plot(X, Y, marker = '*')
-        plt.title('ExampleData Charts')
-        plt.xlabel('X-axis label')
-        plt.ylabel('Y-axis label')
-        plt.show()
-        
-        
-        # x = []
-        # y = []
-        # for line in open('Exampledata.txt', 'r'):
-        #     lines = [i for i in line.split()]
-        #     x.append(lines[0])
-        #     y.append(int(lines[1]))
             
-        # plt.title("ExampleData Charts")
+            # for row in line:
+                # row = row.split(' ')
+                # print(row[0])
+
+                # x.append(int(line[0]))
+                # y.append(int(line[1]))
+        # with open('Exampledata.txt', 'r') as datafile:
+        #     plotting = csv.reader(datafile, delimiter=',')
+            
+            # for line in plotting:
+            # x.append(int(line[0]))
+            # y.append(int(line[1]))
+        
+        # plt.plot(x, y, marker = '*')
+        # plt.title('ExampleData Charts')
         # plt.xlabel('X-axis label')
         # plt.ylabel('Y-axis label')
-        # plt.yticks(y)
-        # plt.plot(x, y, marker = 'o', c = 'g')
-        
-        # plt.show()            
+        # plt.show()
+        # f.close()
+
+
             
     elif choice == 3:
         loop = 0
@@ -182,7 +256,7 @@ else:
     
     
     
-        #used for plotting graph
+        #used for plotting graph--- don't use this sections!
         # user = int(input("How many set data would you like to use?: "))
         # x = np.arange(user)
         # y = []
