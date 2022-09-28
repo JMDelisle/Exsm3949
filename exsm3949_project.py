@@ -1,4 +1,6 @@
+import os
 import csv
+from urllib import response
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -94,17 +96,19 @@ while loop == 1:
 
 
         question3()
-
+        
         def question4():
+            
             i = 0
             while i < 2:
                 answer = input("Would you like to choose a custom line style? (yes or no)")
                 if any(answer.lower() == f for f in ["yes", 'y', '1', 'ye']):
                     print("Please enter a line style # you want to see:(' 1)Solid Line, 2)Dotted Line, 3)Dashed Line, 4)Dashed/Dotted Line') ")
-                    lineStyle = input()
-                    plt.plot(linestyle = lineStyle)
-                
+                    lineStyles=input()
+                    plt.plot(linestyle = lineStyles)
+                    plt.show()
                     break
+
                 elif any(answer.lower() == f for f in ['no', 'n', '0']):
                     print("No")
                     break   
@@ -114,9 +118,6 @@ while loop == 1:
                         print('Please enter yes or no')
                     else:
                         print("Nothing done")
-                if len(userData):
-                    [lineStyle] = userData 
-
 
         question4()
 
@@ -126,14 +127,16 @@ while loop == 1:
                 answer = input("Would you like to choose a custom marker style? (yes or no)")
                 if any(answer.lower() == f for f in ["yes", 'y', '1', 'ye']):
                     print("Please enter a marker style # you want to see: (' 1)Circle, 2)Star, 3)X, 4)Point') ")
-                    markerStyles = input()
-                    plt.plot(marker = markerStyles)
+                    markerStyle = input()
+                    
+                    plt.plot(marker = markerStyle)
                     plt.show()
 
                     break
                 elif any(answer.lower() == f for f in ['no', 'n', '0']):
                     print("No")
                     plt.show()
+
                     break   
                 else:
                     i += 1
@@ -141,6 +144,7 @@ while loop == 1:
                         print('Please enter yes or no')
                     else:
                         print("Nothing done")
+                
                         
 
         question5()
@@ -152,7 +156,6 @@ while loop == 1:
         userData = list()
                        
         def question6():
-            # global userData
 
             i = 0
             while i < 2:
@@ -214,62 +217,11 @@ while loop == 1:
                     plt.xlabel(xaxisLabels)
                     plt.ylabel(yaxisLabels)
                     plt.show()
-                    f.close()
-
-                    
+                    f.close()                    
         question6()
-
-        # f = open('Exampledata.txt', 'r')
-        # for line in f.readlines():
-        #     print(line)
-        #     print(line.strip().split(","))
-        #     dataName = input('Please enter your file name: ')
-        #     fileData = line.strip().split(",")
-            
-            
-            # for row in line:
-                # row = row.split(' ')
-                # print(row[0])
-
-                # x.append(int(line[0]))
-                # y.append(int(line[1]))
-        # with open('Exampledata.txt', 'r') as datafile:
-        #     plotting = csv.reader(datafile, delimiter=',')
-            
-            # for line in plotting:
-            # x.append(int(line[0]))
-            # y.append(int(line[1]))
-        
-        # plt.plot(x, y, marker = '*')
-        # plt.title('ExampleData Charts')
-        # plt.xlabel('X-axis label')
-        # plt.ylabel('Y-axis label')
-        # plt.show()
-        # f.close()
-
-
-            
+    
     elif choice == 3:
         loop = 0
+
 else:
     print("Thank you and have a good day!")
-    
-    
-    
-        #used for plotting graph--- don't use this sections!
-        # user = int(input("How many set data would you like to use?: "))
-        # x = np.arange(user)
-        # y = []
-        # for i in range(0, user):
-        #     value = int(input("Please enter x-axis value: "))
-        #     y.append(value)
-            
-
-        # y = np.array(y)
-        # plt.scatter(x, y)
-        # plt.plot(x, y)
-        # plt.xlabel("X-axis")
-        # plt.ylabel("Y-axis")
-        # plt.title("EXSM3949 - Project")
-        # plt.show()
-
